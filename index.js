@@ -10,6 +10,7 @@ const userServiceProxy = httpProxy(process.env.PROXY_PATH)
 
 // Authentication
 app.use((req, res, next) => {
+	console.log('Request Headers:', req.headers);
 	let auth = false;
 	if(process.env.MODE === 'key') {
 		console.log('Gateway mode KEY');
