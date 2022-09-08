@@ -33,7 +33,7 @@ app.use((req, res, next) => {
 		auth = blessed.includes(referer);
 
 		if(!auth && xForwardedFor) {
-			console.log('X-Forwarded-For Authorized');
+			console.log('X-Forwarded-For Authorized', xForwardedFor);
 			auth = xForwardedFor.some(r => blessed.includes(r));
 		}
 	}
