@@ -27,8 +27,15 @@ app.use((req, res, next) => {
 				return res.json({success: false, message: 'not authorized'});
 		}
 		const referer = req.headers.referer;
+		const xForwardedFor = req.headers['x-forwarded-for'];
 		console.log(`Referral URL: ${referer}`)
+		console.log(`X-Forwarded-For IPs: ${xForwardedFor}`)
 		auth = blessed.includes(referer);
+
+		if(!auth) {
+			console.log('X-Forwarded-For Authorized');
+			auth = xForwardedFor.some(r => blessed.includes(r));
+		}
 	}
 
   if(auth) {
