@@ -42,7 +42,7 @@ app.use((req, res, next) => {
 		if(auth) {
 			console.log('Authorized');
 			next();
-			//return;
+			return;
 		}
 
 		console.log('Not Authorized');
