@@ -41,8 +41,8 @@ app.use((req, res, next) => {
 
 		if(auth) {
 			console.log('Authorized');
-			next()
-			return;
+			next();
+			//return;
 		}
 
 		console.log('Not Authorized');
@@ -53,7 +53,7 @@ app.use((req, res, next) => {
 	}
 })
 
-app.post(process.env.PROXY_ROUTE, (req, res, next) => {
+app.post('/api/v1/:path', (req, res, next) => {
 	console.log(`Forward to ${process.env.PROXY_ROUTE}`);
   userServiceProxy(req, res, next)
 })
