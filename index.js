@@ -32,7 +32,7 @@ app.use((req, res, next) => {
 		console.log(`X-Forwarded-For IPs: ${xForwardedFor}`)
 		auth = blessed.includes(referer);
 
-		if(!auth) {
+		if(!auth && xForwardedFor) {
 			console.log('X-Forwarded-For Authorized');
 			auth = xForwardedFor.some(r => blessed.includes(r));
 		}
