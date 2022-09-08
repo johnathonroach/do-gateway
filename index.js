@@ -54,6 +54,7 @@ app.use((req, res, next) => {
 })
 
 app.post(process.env.PROXY_ROUTE, (req, res, next) => {
+	console.log(`Forward to ${process.env.PROXY_ROUTE}`);
   userServiceProxy(req, res, next)
 })
 
