@@ -53,6 +53,11 @@ app.use((req, res, next) => {
 	}
 })
 
+app.post('/', (req, res, next) => {
+	console.log(`Forward to /`);
+  userServiceProxy(req, res, next)
+})
+
 app.post('/api/v1/:path', (req, res, next) => {
 	console.log(`Forward to ${process.env.PROXY_ROUTE}`);
   userServiceProxy(req, res, next)
