@@ -42,7 +42,7 @@ app.use((req, res, next) => {
 
 		if(auth) {
 			console.log('Authorized');
-			next();
+			userServiceProxy(req, res, next);
 			return;
 		}
 
@@ -54,15 +54,15 @@ app.use((req, res, next) => {
 	}
 })
 
-app.post('/', (req, res, next) => {
-	console.log(`Forward to /`);
-  userServiceProxy(req, res, next)
-})
+// app.post('/', (req, res, next) => {
+// 	console.log(`Forward to /`);
+//   userServiceProxy(req, res, next)
+// })
 
-app.post('/api/v1/:path', (req, res, next) => {
-	console.log(`Forward to ${process.env.PROXY_ROUTE}`);
-  userServiceProxy(req, res, next)
-})
+// app.post('/api/v1/:path', (req, res, next) => {
+// 	console.log(`Forward to ${process.env.PROXY_ROUTE}`);
+//   userServiceProxy(req, res, next)
+// })
 
 app.listen(port, () => {
   console.log(`Listening on port ${port}`)
