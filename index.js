@@ -14,12 +14,22 @@ app.use((req, res, next) => {
 		console.log('Request Headers:', req.headers);
 		console.log('Request URL:', req.url || 'not set');
 		let auth = false;
-		if(process.env.MODE === 'key') {
-			console.log('Gateway mode KEY');
+		if(process.env.MODE === 'api_key') {
+			console.log('Gateway mode API KEY');
 			if(!req.headers.authorization || !process.env.AUTH){
 					return res.json({success: false, message: 'not authorized'});
 			}
 			auth = bcrypt.compareSync(req.headers.authorization, process.env.AUTH);
+		}
+		if(process.env.MODE === 'header_key') {
+			console.log('Gateway mode HEADER KEY');
+			const key = process.env.HEADER_KEY;
+			const val = process.env.HEADER_VALUE;
+			if(!key || !val){
+					return res.json({success: false, message: 'not authorized'});
+			}
+			console.log(`Header Key: ${key} ${val}`)
+			auth = req.header[key] && req.header[key] === val;
 		}
 		if(process.env.MODE === 'bless') {
 			console.log('Gateway mode BLESS');
