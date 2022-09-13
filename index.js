@@ -28,14 +28,6 @@ app.use((req, res, next) => {
 			if(!key || !val){
 					return res.json({success: false, message: 'not authorized'});
 			}
-			console.log(`Header Key: ${key} ${val}`)
-			console.log({
-				'header key': req.headers[key],
-				'env': {
-					'key': process.env.HEADER_KEY,
-					'val': process.env.HEADER_VALUE
-				}
-			});
 			auth = req.headers[key] && req.headers[key] === val;
 		}
 		if(process.env.MODE === 'bless') {
