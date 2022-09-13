@@ -30,8 +30,7 @@ app.use((req, res, next) => {
 			}
 			console.log(`Header Key: ${key} ${val}`)
 			console.log({
-				'key': key,
-				'val': val,
+				'header key': req.header[key],
 				'env': {
 					'key': process.env.HEADER_KEY,
 					'val': process.env.HEADER_VALUE
