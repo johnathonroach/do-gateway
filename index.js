@@ -55,11 +55,9 @@ app.use((req, res, next) => {
 			return;
 		}
 
-		res.status(401).json({ error: 'Unauthorized' });
-		return;
+		return res.status(401).json({ error: 'Unauthorized' });
 	}catch(err){
-		res.status(401).json({ error: 'Unauthorized' });
-		return;
+		return res.status(401).json({ error: 'Unauthorized' });
 	}
 })
 
