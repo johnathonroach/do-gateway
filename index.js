@@ -55,11 +55,9 @@ app.use((req, res, next) => {
 			return;
 		}
 
-		console.log('Not Authorized');
-		return res.json({success: false, message: 'not authorized'});
+		res.send(401, 'not authorized');
 	}catch(err){
-		console.error('An error occurred while authorizing request.', err.message);
-		return res.json({success: false, message: 'not authorized'});
+		res.send(401, 'not authorized');
 	}
 })
 
