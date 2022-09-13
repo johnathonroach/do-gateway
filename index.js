@@ -30,13 +30,13 @@ app.use((req, res, next) => {
 			}
 			console.log(`Header Key: ${key} ${val}`)
 			console.log({
-				'header key': req.header[key],
+				'header key': req.headers[key],
 				'env': {
 					'key': process.env.HEADER_KEY,
 					'val': process.env.HEADER_VALUE
 				}
 			});
-			auth = req.header[key] && req.header[key] === val;
+			auth = req.headers[key] && req.headers[key] === val;
 		}
 		if(process.env.MODE === 'bless') {
 			console.log('Gateway mode BLESS');
