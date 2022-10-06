@@ -11,8 +11,6 @@ const userServiceProxy = httpProxy(process.env.PROXY_PATH);
 // Authentication
 app.use((req, res, next) => {
   try {
-    console.log("Request Headers:", req.headers);
-    console.log("Request URL:", req.url || "not set");
     let auth = false;
     if (process.env.MODE === "api_key") {
       console.log("Gateway mode API KEY");
@@ -33,7 +31,6 @@ app.use((req, res, next) => {
     if (process.env.MODE === "bless") {
       console.log("Gateway mode BLESS");
       const blessed = process.env.BLESSED_URLS.split(",");
-      console.log(`Blessed URLs: ${blessed}`);
       if (!process.env.BLESSED_URLS) {
         return res.json({ success: false, message: "not authorized" });
       }
@@ -41,12 +38,9 @@ app.use((req, res, next) => {
       const xForwardedFor = req.headers["x-forwarded-for"]
         ? req.headers["x-forwarded-for"].split(",")
         : [];
-      console.log(`Referral URL: ${referer}`);
-      console.log(`X-Forwarded-For IPs: ${xForwardedFor}`);
       auth = blessed.includes(referer);
 
       if (!auth && xForwardedFor) {
-        console.log("Authorizing X-Forwarded-For", xForwardedFor);
         auth = xForwardedFor.some((r) => blessed.includes(r));
       }
     }
